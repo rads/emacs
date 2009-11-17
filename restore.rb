@@ -1,5 +1,5 @@
 File.open('local.el', 'w') do |f|
-  f.puts 'load ("rads")'
+  f.puts '(load "rads")'
 end
 
 `git submodule update --init`
