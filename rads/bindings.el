@@ -14,3 +14,6 @@
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; shell
+(global-set-key (kbd "C-x C-z") 'shell)
