@@ -1,5 +1,6 @@
 ;; others
 (load "rads/shell")
+(load "rads/javascript")
 
 ;; whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

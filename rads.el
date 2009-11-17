@@ -10,8 +10,6 @@
 (vendor 'magit)
 (vendor 'textmate)
 (textmate-mode)
-(vendor 'rinari)
-(vendor 'rhtml-mode)
 
 (server-start)
 (shell)
