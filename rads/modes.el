@@ -34,3 +34,7 @@
 ;; Rinari
 (add-to-list 'load-path "~/.emacs.d/vendor/rinari")
 (require 'rinari)
+
+;; rhtml
+(add-to-list 'load-path "~/.emacs.d/vendor/rhtml")
+(require 'rhtml-mode)
