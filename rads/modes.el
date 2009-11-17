@@ -19,7 +19,3 @@
 ;; go
 ;(add-to-list 'load-path "~/go/misc/emacs" t)
 ;(require 'go-mode-load)
-
-;; auto pair
-(require 'autopair)
-(autopair-global-mode)
