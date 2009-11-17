@@ -1,3 +1,0 @@
-[submodule "vendor/html5"]
-	path = vendor/html5
-	url = git://github.com/hober/html5-el.git
