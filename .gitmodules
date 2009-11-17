@@ -10,3 +10,6 @@
 [submodule "vendor/yasnippets-rails"]
 	path = vendor/yasnippets-rails
 	url = git://github.com/eschulte/yasnippets-rails.git
+[submodule "vendor/magit"]
+	path = vendor/magit
+	url = git://github.com/jwiegley/magit.git

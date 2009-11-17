@@ -7,6 +7,7 @@
 (load "rads/modes")
 (load "rads/temp_files")
 
+(vendor 'magit)
 (vendor 'textmate)
 (textmate-mode)
 (vendor 'rinari)
