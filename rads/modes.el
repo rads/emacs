@@ -20,10 +20,6 @@
         ido-use-filename-at-point 'guess
         ido-max-prospects 10))
 
-;; go
-;(add-to-list 'load-path "~/go/misc/emacs" t)
-;(require 'go-mode-load)
-
 ;; yasnippet
 (vendor 'yasnippet)
 (yas/initialize)
