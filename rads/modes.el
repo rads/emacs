@@ -25,23 +25,12 @@
 ;(require 'go-mode-load)
 
 ;; yasnippet
-(add-to-list 'load-path "~/.emacs.d/vendor/yasnippet")
-(require 'yasnippet)
+(vendor 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
 
 ;; textmate
-(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
-(require 'textmate)
 (textmate-mode)
-
-;; Rinari
-(add-to-list 'load-path "~/.emacs.d/vendor/rinari")
-(require 'rinari)
-
-;; rhtml
-(add-to-list 'load-path "~/.emacs.d/vendor/rhtml")
-(require 'rhtml-mode)
 
 ;; paredit
 (autoload 'paredit-mode "paredit"
