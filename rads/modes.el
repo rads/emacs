@@ -17,8 +17,8 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; go
-(add-to-list 'load-path "~/go/misc/emacs" t)
-(require 'go-mode-load)
+;(add-to-list 'load-path "~/go/misc/emacs" t)
+;(require 'go-mode-load)
 
 ;; auto pair
 (require 'autopair)
