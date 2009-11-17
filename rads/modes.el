@@ -29,9 +29,6 @@
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
 
-;; textmate
-(textmate-mode)
-
 ;; paredit
 (autoload 'paredit-mode "paredit"
      "Minor mode for pseudo-structurally editing Lisp code."

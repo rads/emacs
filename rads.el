@@ -8,6 +8,7 @@
 (load "rads/temp_files")
 
 (vendor 'textmate)
+(textmate-mode)
 (vendor 'rinari)
 (vendor 'rhtml-mode)
 
