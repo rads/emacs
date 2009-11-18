@@ -1,7 +1,8 @@
 ;; indentation
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 (setq-default c-indent-level 2)
 (setq-default indent-tabs-mode nil)
+(setq-default c-basic-offset 2)
 (prefer-coding-system 'utf-8)
 
 (when window-system
@@ -34,7 +35,7 @@
   (require 'osx-plist)
   (when (file-exists-p "~/.MacOSX/environment.plist")
     (osx-plist-update-environment)))
- 
+
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)
 

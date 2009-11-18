@@ -1,6 +1,7 @@
 ;; others
 (load "rads/shell")
 (load "rads/javascript")
+(load "rads/clojure")
 
 ;; whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
