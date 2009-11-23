@@ -49,3 +49,7 @@
 (vendor 'autopair)
 (add-hook 'html-mode-hook
           #'(lambda () (autopair-mode)))
+
+(vendor 'php-mode)
+(add-to-list 'auto-mode-alist
+     	     '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
