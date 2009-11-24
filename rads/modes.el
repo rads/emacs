@@ -53,3 +53,11 @@
 (vendor 'php-mode)
 (add-to-list 'auto-mode-alist
      	     '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
+
+(vendor 'google-c-style)
+(add-hook 'c-mode-common-hook
+          '(lambda ()
+             (setq c-auto-newline t)
+             (define-key c-mode-map "{" 'defunkt/c-electric-brace)))
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)

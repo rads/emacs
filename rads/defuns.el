@@ -20,7 +20,7 @@
         (set-visited-file-name new-name)
         (set-buffer-modified-p nil))))))
 
-; for loading libraries in from the vendor directory
+;; credit to defunkt for these next three functions
 (defun vendor (library)
   (let* ((file (symbol-name library))
          (normal (concat "~/.emacs.d/vendor/" file))
@@ -29,3 +29,22 @@
      ((file-directory-p normal) (add-to-list 'load-path normal) (require library))
      ((file-directory-p suffix) (add-to-list 'load-path suffix) (require library))
      ((file-exists-p suffix) (require library)))))
+
+(defun defunkt-clean-slate ()
+  "Kills all buffers except *scratch*"
+  (interactive)
+  (let ((buffers (buffer-list)) (safe '("*scratch*")))
+    (while buffers
+      (when (not (member (car buffers) safe))
+        (kill-buffer (car buffers))
+        (setq buffers (cdr buffers))))))
+
+(defun defunkt/c-electric-brace (arg)
+  "Inserts a closing curly, too."
+  (interactive "*P")
+  (c-electric-brace arg)
+  (save-excursion
+    (insert "\n")
+    (insert "}")
+    (indent-according-to-mode)))
+
