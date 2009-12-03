@@ -4,6 +4,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 2)
 (prefer-coding-system 'utf-8)
+(setq vc-handled-backends nil)
 
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
