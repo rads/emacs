@@ -4,35 +4,34 @@
 
 (eval-after-load 'js2-mode
   '(progn
- 
+
      ;; Cosmetics
      (font-lock-add-keywords
       'js2-mode `(("\\(function *\\)("
                    (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                              "ƒ")
                              nil)))))
- 
+
      (font-lock-add-keywords
       'js2-mode
       '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
          1 font-lock-warning-face t)))
- 
+
      (defun js-lambda () (interactive) (insert "function () {\n}")
        (backward-char 5))
- 
-     (add-hook 'js2-mode-hook 'coding-hook)
- 
+
      (define-key js2-mode-map (kbd "C-c l") 'js-lambda)
      (define-key js2-mode-map "\C-\M-h" 'backward-kill-word)
- 
+
      ;; Fix js2's crazy indentation
      (define-key js2-mode-map (kbd "TAB") (lambda () (interactive)
                                             (indent-for-tab-command)
                                             (back-to-indentation)))
- 
+     (define-key js2-mode-map (kbd "RET") 'newline-and-indent)
+
      (setq js2-bounce-indent-flag nil
            js2-indent-on-enter-key t)
- 
+
      (defun js-continued-var-decl-list-p ()
        "Return non-nil if point is inside a continued variable declaration list."
        (interactive)
@@ -42,7 +41,7 @@
               (not (save-excursion
                      (js-re-search-backward
                       ";\\|[^, \t][ \t]*\\(/[/*]\\|$\\)" start t))))))
-     
+
      (defun js-proper-indentation (parse-status)
        "Return the proper indentation for the current line."
        (save-excursion
@@ -73,7 +72,7 @@
                     (current-column)))
                  (continued-expr-p js2-basic-offset)
                  (t 0)))))))
- 
+
 
 ;; js-shell
 (autoload 'javascript-shell "javascript-mode" nil t)

@@ -8,6 +8,7 @@
 (load "rads/temp_files")
 
 (vendor 'magit)
+(vendor 'ack)
 (vendor 'textmate)
 (textmate-mode)
 
