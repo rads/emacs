@@ -50,3 +50,15 @@
   (when (ruby-previous-line-is-comment)
       (insert "# "))
   (indent-according-to-mode))
+
+(defun ruby-previous-line-is-comment ()
+  "Returns `t' if the previous line is a Ruby comment."
+  (save-excursion
+    (forward-line -1)
+    (ruby-line-is-comment)))
+
+(defun ruby-line-is-comment ()
+  "Returns `t' if the current line is a Ruby comment."
+  (save-excursion
+    (beginning-of-line)
+    (search-forward "#" (point-at-eol) t)))
