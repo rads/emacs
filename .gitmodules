@@ -16,6 +16,3 @@
 [submodule "vendor/clojure-mode"]
 	path = vendor/clojure-mode
 	url = git://github.com/technomancy/clojure-mode.git
-[submodule "vendor/swank-clojure"]
-	path = vendor/swank-clojure
-	url = git://github.com/technomancy/swank-clojure.git
