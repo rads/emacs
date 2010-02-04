@@ -61,3 +61,8 @@
              (define-key c-mode-map "{" 'defunkt/c-electric-brace)))
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+;; haskell
+(load "~/.emacs.d/vendor/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
