@@ -18,7 +18,7 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; font
-(setq default-frame-alist '((font . "-unknown-Consolas-normal-normal-normal-*-15-*-*-*-m-0-*-*")))
+;(setq default-frame-alist '((font . "-unknown-Consolas-normal-normal-normal-*-15-*-*-*-m-0-*-*")))
 
 ;; common packages
 (require 'cl)
