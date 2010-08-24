@@ -1,6 +1,5 @@
 ;; others
 (load "rads/shell")
-(load "rads/javascript")
 (load "rads/clojure")
 (load "rads/ruby")
 
