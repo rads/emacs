@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/color-theme")
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-arjen)
+(load-file "~/.emacs.d/vendor/zenburn.el")
+(color-theme-zenburn)

@@ -1,5 +1,5 @@
 ;; indentation
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 (setq-default c-indent-level 2)
 (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 2)
@@ -49,7 +49,6 @@
       delete-by-moving-to-trash t
       shift-select-mode nil
       truncate-partial-width-windows nil
-      delete-by-moving-to-trash nil
       uniquify-buffer-name-style 'forward
       whitespace-style '(trailing lines space-before-tab
                                   indentation space-after-tab)
