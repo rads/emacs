@@ -10,6 +10,7 @@
 (vendor 'magit)
 (vendor 'ack)
 (vendor 'textmate)
+(vendor 'peepopen)
 (textmate-mode)
 
 (server-start)
