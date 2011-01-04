@@ -1,3 +1,6 @@
+(setq dotfiles-dir (file-name-directory
+                    (or (buffer-file-name) load-file-name)))
+
 ;; indentation
 (setq-default tab-width 2)
 (setq-default c-indent-level 2)
@@ -41,18 +44,27 @@
 (setq x-select-enable-clipboard t)
 
 (setq visible-bell t
+      fringe-mode (cons 4 0)
       echo-keystrokes 0.1
       font-lock-maximum-decoration t
       inhibit-startup-message t
       transient-mark-mode t
       color-theme-is-global t
-      delete-by-moving-to-trash t
       shift-select-mode nil
+      mouse-yank-at-point t
+      require-final-newline t
       truncate-partial-width-windows nil
       uniquify-buffer-name-style 'forward
+      ffap-machine-p-known 'reject
       whitespace-style '(trailing lines space-before-tab
-                                  indentation space-after-tab)
+                                  face indentation space-after-tab)
       whitespace-line-column 100
-      xterm-mouse-mode t)
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      oddmuse-directory (concat dotfiles-dir "oddmuse")
+      xterm-mouse-mode t
+      save-place-file (concat dotfiles-dir "places"))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(defvar coding-hook nil
+  "Hook that gets run on activation of any programming mode.")

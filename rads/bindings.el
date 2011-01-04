@@ -1,10 +1,19 @@
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (define-key org-mode-map [(control tab)] nil)))
+
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+(global-set-key [C-tab] 'other-window)
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
-(global-set-key [C-tab] 'other-window)
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
+
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-iswitchb)
 
 (defalias 'qrr 'query-replace-regexp)
 

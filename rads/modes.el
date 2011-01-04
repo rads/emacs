@@ -1,7 +1,7 @@
 ;; others
-(load "rads/shell")
-(load "rads/clojure")
-(load "rads/ruby")
+(load "rads/modes/shell")
+(load "rads/modes/clojure")
+(load "rads/modes/ruby")
 
 ;; whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -53,13 +53,7 @@
 (add-to-list 'auto-mode-alist
      	     '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
 
-(vendor 'google-c-style)
-(add-hook 'c-mode-common-hook
-          '(lambda ()
-             (setq c-auto-newline t)
-             (define-key c-mode-map "{" 'defunkt/c-electric-brace)))
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
 
 ;; haskell
 (load "~/.emacs.d/vendor/haskell-mode/haskell-site-file")
@@ -74,3 +68,6 @@
 (setq auto-mode-alist
       (cons '("\\.txt" . markdown-mode) auto-mode-alist))
 (add-hook 'markdown-mode-hook 'visual-line-mode)
+
+(setq org-completion-use-ido t)
+(add-hook 'org-mode-hook 'visual-line-mode)
