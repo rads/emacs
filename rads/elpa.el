@@ -5,7 +5,9 @@
                             'markdown-mode
                             'color-theme
                             'zenburn
-                            'yari)
+                            'yari
+                            'magit
+                            'rinari)
   "Libraries that should be installed by default.")
 
 (defun rads-elpa-install ()

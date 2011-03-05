@@ -35,6 +35,7 @@
                                       ;; Makefile and Makefile<2>.
 
   flyspell-issue-message-flag nil     ;; Flyspell is slow if this is not nil.
+  vc-handled-backends nil             ;; Disable version control.
 
   ;; Show when spaces and tabs are next to each other.
   whitespace-style '(trailing lines space-before-tab
@@ -75,8 +76,9 @@
                                      ;; matches.
   ido-max-prospects 10)              ;; Limit to 10 choices.
 
-(set-default 'indent-tabs-mode nil)  ;; Use spaces, not tabs.
-(set-default 'indicate-empty-lines t)  ;; Show empty trailing lines.
+(set-default 'indent-tabs-mode nil)   ;; Use spaces, not tabs.
+(set-default 'indicate-empty-lines t) ;; Show empty trailing lines.
+(set-default 'imenu-auto-rescan t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -91,3 +93,19 @@
 
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)
+
+;; Colors
+(set-face-background 'vertical-border "white")
+(set-face-foreground 'vertical-border "white")
+
+(eval-after-load 'diff-mode
+  '(progn
+     (set-face-foreground 'diff-added "green4")
+     (set-face-foreground 'diff-removed "red3")))
+
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-del "red3")
+     (when (not window-system)
+       (set-face-background 'magit-item-highlight "white"))))

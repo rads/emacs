@@ -29,3 +29,6 @@
 
 ;; Ruby RI
 (global-set-key (kbd "C-h r") 'yari)
+
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)

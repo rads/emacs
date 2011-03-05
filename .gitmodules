@@ -1,3 +1,6 @@
-[submodule "elpa-to-submit/yasnippet-ruby-mode"]
-	path = elpa-to-submit/yasnippet-ruby-mode
+[submodule "vendor/yasnippet-ruby-mode"]
+	path = vendor/yasnippet-ruby-mode
 	url = git://github.com/bmaland/yasnippet-ruby-mode.git
+[submodule "vendor/textmate.el"]
+	path = vendor/textmate.el
+	url = git://github.com/defunkt/textmate.el.git

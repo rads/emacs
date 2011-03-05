@@ -6,8 +6,9 @@
 ;; Set up load path.
 (setq dotfiles-dir (file-name-directory
                      (or (buffer-file-name) load-file-name)))
+(setq vendor-dir (concat dotfiles-dir "vendor/"))
 (add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit"))
+(add-to-list 'load-path vendor-dir)
 
 ;; Set up ELPA.
 (require 'package)
