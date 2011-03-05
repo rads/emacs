@@ -6,6 +6,5 @@ auto-save-list
 url/*
 local.el
 *~
-elpa/*
 tramp
 .org-id-locations
