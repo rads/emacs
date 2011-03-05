@@ -45,6 +45,8 @@
   xterm-mouse-mode t                  ;; Allow mouse clicks in the terminal.
   save-place-file (concat dotfiles-dir "places"))
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; Color theme
 (require 'color-theme)
 (require 'zenburn)
