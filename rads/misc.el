@@ -77,6 +77,7 @@
   ido-max-prospects 10)              ;; Limit to 10 choices.
 
 (set-default 'indent-tabs-mode nil)   ;; Use spaces, not tabs.
+(set-default 'tab-width 4)
 (set-default 'indicate-empty-lines t) ;; Show empty trailing lines.
 (set-default 'imenu-auto-rescan t)
 

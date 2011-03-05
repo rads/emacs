@@ -1,5 +1,3 @@
-(require 'autopair)
-
 ;; Coding hook
 (add-hook 'coding-hook 'turn-on-whitespace)
 (add-hook 'coding-hook 'local-comment-auto-fill)
@@ -21,13 +19,22 @@
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
+;; JavaScript
+(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-hook 'js-mode-hook '(lambda ()
+  (run-coding-hook)
+  (setq js-indent-level 2)
+  (define-key js-mode-map (kbd "RET") 'newline-and-indent)))
+
 ;; Ruby
-(eval-after-load 'ruby-mode
-  '(progn
-     (set (make-local-variable 'tab-width) 2)
-     (setq ruby-use-encoding-map nil)
-     (add-hook 'ruby-mode-hook 'run-coding-hook)
-     (define-key ruby-mode-map (kbd "RET") 'newline-and-indent)))
+(add-hook 'ruby-mode-hook '(lambda ()
+  (run-coding-hook)
+  (set (make-local-variable 'tab-width) 2)
+  (setq ruby-use-encoding-map nil)
+  (define-key ruby-mode-map (kbd "RET") 'newline-and-indent)))
+
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 
 ;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
@@ -57,8 +64,13 @@
       (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
             'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
 
+(add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.rhtml$" . eruby-nxhtml-mumamo-mode))
+
 ;; Textmate and Peepopen
 (add-to-list 'load-path (concat vendor-dir "textmate.el/"))
 (require 'textmate)
 (require 'peepopen)
 (textmate-mode)
+
+(require 'autopair)
