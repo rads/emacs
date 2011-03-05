@@ -7,10 +7,7 @@
 (setq dotfiles-dir (file-name-directory
                      (or (buffer-file-name) load-file-name)))
 (add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path (concat dotfiles-dir "/vendor"))
-
-;; Load system-specific config.
-(load (concat dotfiles-dir "local.el"))
+(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit"))
 
 ;; Set up ELPA.
 (require 'package)
@@ -19,15 +16,24 @@
             ("elpa" . "http://tromey.com/elpa/")))
   (add-to-list 'package-archives source t))
 (package-initialize)
+(load (concat dotfiles-dir "rads/elpa.el"))
 
 ;; Require basic packages.
 (require 'cl)         ;; Common Lisp Extension
-(require 'saveplace)  ;; Save place between files
-(require 'ffap)       ;; More sensible key bindings for finding files
-(require 'uniquify)   ;; More sensible buffer names
-(require 'ansi-color) ;; ANSI color in shells
+(require 'saveplace)  ;; Save place in files.
+(require 'uniquify)   ;; Use more sensible buffer names.
+(require 'ansi-color) ;; Add ANSI color in shells.
 (require 'recentf)    ;; Keep track of recently modified files.
+(require 'imenu)
 
-;; Load custom functions.
-(load (concat dotfiles-dir "defuns.el"))
+;; Load my customizations.
+(load (concat dotfiles-dir "rads/defuns.el"))
+(load (concat dotfiles-dir "rads/bindings.el"))
+(load (concat dotfiles-dir "rads/misc.el"))
+(load (concat dotfiles-dir "rads/modes.el"))
 
+;; Load system- and user-specific config.
+(setq system-specific-config (concat dotfiles-dir system-name ".el")
+      user-specific-config (concat dotfiles-dir user-login-name ".el"))
+(if (file-exists-p system-specific-config) (load system-specific-config))
+(if (file-exists-p user-specific-config) (load user-specific-config))
