@@ -36,3 +36,6 @@
 (load (concat dotfiles-dir "rads/bindings.el"))
 (load (concat dotfiles-dir "rads/misc.el"))
 (load (concat dotfiles-dir "rads/modes.el"))
+
+(when window-system
+  (server-start))
