@@ -1,3 +1,8 @@
+;; Put the window on the top left.
+(add-to-list 'default-frame-alist '(top . 0))
+(add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist (cons 'height my-max-height))
+
 ;; Make the titles better and remove any UI.
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
@@ -84,8 +89,10 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Don't clutter up directories with files~
-(setq backup-directory-alist `(("." . ,(expand-file-name
-                                         (concat dotfiles-dir "backups")))))
+(setq temporary-file-directory (expand-file-name
+                                 (concat dotfiles-dir "backups/")))
+(setq backup-directory-alist `(("." . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
 ;; Platform-specific stuff
 (when (eq system-type 'darwin)

@@ -27,14 +27,12 @@
 (require 'recentf)    ;; Keep track of recently modified files.
 (require 'imenu)
 
+;; Load system- and user-specific config.
+(setq system-specific-config (concat dotfiles-dir "rads/systems/" system-name ".el"))
+(if (file-exists-p system-specific-config) (load system-specific-config))
+
 ;; Load my customizations.
 (load (concat dotfiles-dir "rads/defuns.el"))
 (load (concat dotfiles-dir "rads/bindings.el"))
 (load (concat dotfiles-dir "rads/misc.el"))
 (load (concat dotfiles-dir "rads/modes.el"))
-
-;; Load system- and user-specific config.
-(setq system-specific-config (concat dotfiles-dir system-name ".el")
-      user-specific-config (concat dotfiles-dir user-login-name ".el"))
-(if (file-exists-p system-specific-config) (load system-specific-config))
-(if (file-exists-p user-specific-config) (load user-specific-config))

@@ -7,12 +7,19 @@
 (add-hook 'coding-hook 'idle-highlight)
 (add-hook 'coding-hook 'turn-on-autopair)
 
+;; C
+(add-hook 'c-mode-hook 'run-coding-hook)
+(add-hook 'c-mode-hook (lambda ()
+  (setq c-electric-flag nil)
+  (setq c-basic-offset 4)
+  (abbrev-mode 0)))
+
 ;; Yasnippet
 (add-to-list 'load-path (concat vendor-dir "yasnippet"))
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory (concat vendor-dir "yasnippet/snippets"))
-(yas/load-directory (concat dotfiles-dir "snippets"))
+(yas/load-directory (concat dotfiles-dir "rads/snippets"))
 
 ;; Markdown
 (add-to-list 'auto-mode-alist '("\\.txt$" . markdown-mode))
@@ -24,15 +31,17 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 (add-hook 'js-mode-hook '(lambda ()
   (run-coding-hook)
-  (setq js-indent-level 2)
-  (define-key js-mode-map (kbd "RET") 'newline-and-indent)))
+  (setq js-indent-level 2)))
 
 ;; Ruby
-(add-hook 'ruby-mode-hook '(lambda ()
-  (run-coding-hook)
-  (set (make-local-variable 'tab-width) 2)
-  (setq ruby-use-encoding-map nil)
+(add-hook 'ruby-mode-hook 'run-coding-hook)
+(add-hook 'ruby-mode-hook (lambda ()
   (define-key ruby-mode-map (kbd "RET") 'newline-and-indent)))
+
+(eval-after-load 'ruby-mode
+  '(progn
+     (set (make-local-variable 'tab-width) 2)
+     (setq ruby-use-encoding-map nil)))
 
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 
@@ -51,7 +60,12 @@
 (setq mumamo-chunk-coloring 'submode-colored
       nxhtml-skip-welcome t
       indent-region-mode t
-      rng-nxml-auto-validate-flag nil)
+      rng-nxml-auto-validate-flag nil
+      nxml-degraded t)
+
+(add-hook 'nxml-mode-hook 'turn-on-autopair)
+(add-hook 'nxml-mode-hook '(lambda ()
+  (setq autopair-extra-pairs `(:everywhere ((?< . ?>))))))
 
 (eval-after-load 'mumamo
   '(eval-after-load 'zenburn
