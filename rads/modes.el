@@ -1,73 +1,90 @@
-;; others
-(load "rads/modes/shell")
-(load "rads/modes/clojure")
-(load "rads/modes/ruby")
+;; Coding hook
+(add-hook 'coding-hook 'turn-on-whitespace)
+(add-hook 'coding-hook 'local-comment-auto-fill)
+(add-hook 'coding-hook 'turn-on-hl-line-mode)
+(add-hook 'coding-hook 'turn-on-save-place-mode)
+(add-hook 'coding-hook 'add-watchwords)
+(add-hook 'coding-hook 'idle-highlight)
+(add-hook 'coding-hook 'turn-on-autopair)
 
-;; whitespace
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-(setq show-trailing-whitespace (not buffer-read-only))
+;; C
+(add-hook 'c-mode-hook 'run-coding-hook)
+(add-hook 'c-mode-hook (lambda ()
+  (setq c-electric-flag nil)
+  (setq c-basic-offset 4)
+  (abbrev-mode 0)))
 
-;; Save a list of recent files visited.
-(recentf-mode 1)
-
-;; Highlight matching parentheses when the point is on them.
-(show-paren-mode 1)
-
-;; ido-mode is like magic pixie dust!
-(when (> emacs-major-version 21)
-  (ido-mode t)
-  (setq ido-enable-prefix nil
-        ido-enable-flex-matching t
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point 'guess
-        ido-max-prospects 10))
-
-;; yasnippet
-(vendor 'yasnippet)
+;; Yasnippet
+(add-to-list 'load-path (concat vendor-dir "yasnippet"))
+(require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
-(yas/load-directory "~/.emacs.d/vendor/yasnippets-rails/rails-snippets")
-(setq yas/prompt-functions '(yas/ido-prompt))
+(yas/load-directory (concat vendor-dir "yasnippet/snippets"))
+(yas/load-directory (concat dotfiles-dir "rads/snippets"))
 
-;; paredit
-(autoload 'paredit-mode "paredit"
-     "Minor mode for pseudo-structurally editing Lisp code."
-     t)
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
+;; Markdown
+(add-to-list 'auto-mode-alist '("\\.txt$" . markdown-mode))
+(add-hook 'text-mode-hook 'turn-on-flyspell)
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
-;; magit
-(eval-after-load 'magit
+;; JavaScript
+(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-hook 'js-mode-hook '(lambda ()
+  (run-coding-hook)
+  (setq js-indent-level 2)))
+
+;; Ruby
+(add-hook 'ruby-mode-hook 'run-coding-hook)
+(add-hook 'ruby-mode-hook (lambda ()
+  (define-key ruby-mode-map (kbd "RET") 'newline-and-indent)))
+
+(eval-after-load 'ruby-mode
   '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")))
+     (set (make-local-variable 'tab-width) 2)
+     (setq ruby-use-encoding-map nil)))
 
-;; autopair
-(vendor 'autopair)
-(add-hook 'html-mode-hook
-          #'(lambda () (autopair-mode)))
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 
-(vendor 'php-mode)
-(add-to-list 'auto-mode-alist
-     	     '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
+;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
-(add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
+;; nXhtml
+(load (concat vendor-dir "nxhtml/autostart.el"))
 
-;; haskell
-(load "~/.emacs.d/vendor/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(setq mumamo-chunk-coloring 'submode-colored
+      nxhtml-skip-welcome t
+      indent-region-mode t
+      rng-nxml-auto-validate-flag nil
+      nxml-degraded t)
 
-(vendor 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-hook 'nxml-mode-hook 'turn-on-autopair)
+(add-hook 'nxml-mode-hook '(lambda ()
+  (setq autopair-extra-pairs `(:everywhere ((?< . ?>))))))
 
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode for editing Markdown files" t)
-(setq auto-mode-alist
-      (cons '("\\.txt" . markdown-mode) auto-mode-alist))
-(add-hook 'markdown-mode-hook 'visual-line-mode)
+(eval-after-load 'mumamo
+  '(eval-after-load 'zenburn
+     '(ignore-errors (custom-set-faces
+                      '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil)))
+                      '(mumamo-background-chunk-submode1 ((((class color) (min-colors 88) (background dark)) (:background "grey20"))))))))
 
-(setq org-completion-use-ido t)
-(add-hook 'org-mode-hook 'visual-line-mode)
+;; Rinari (Minor Mode for Ruby On Rails)
+(setq rinari-major-modes
+      (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
+            'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
+
+(add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.rhtml$" . eruby-nxhtml-mumamo-mode))
+
+;; Textmate and Peepopen
+(add-to-list 'load-path (concat vendor-dir "textmate.el/"))
+(require 'textmate)
+(require 'peepopen)
+(textmate-mode)
+
+(require 'autopair)

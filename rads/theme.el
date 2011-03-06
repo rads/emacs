@@ -1,5 +1,0 @@
-(add-to-list 'load-path "~/.emacs.d/vendor/color-theme")
-(require 'color-theme)
-(color-theme-initialize)
-(load-file "~/.emacs.d/vendor/zenburn.el")
-(color-theme-zenburn)

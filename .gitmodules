@@ -1,18 +1,6 @@
+[submodule "vendor/yasnippet-ruby-mode"]
+	path = vendor/yasnippet-ruby-mode
+	url = git://github.com/bmaland/yasnippet-ruby-mode.git
 [submodule "vendor/textmate.el"]
 	path = vendor/textmate.el
 	url = git://github.com/defunkt/textmate.el.git
-[submodule "vendor/rinari"]
-	path = vendor/rinari
-	url = git://github.com/eschulte/rinari.git
-[submodule "vendor/rhtml"]
-	path = vendor/rhtml
-	url = git://github.com/eschulte/rhtml.git
-[submodule "vendor/yasnippets-rails"]
-	path = vendor/yasnippets-rails
-	url = git://github.com/eschulte/yasnippets-rails.git
-[submodule "vendor/magit"]
-	path = vendor/magit
-	url = git://github.com/jwiegley/magit.git
-[submodule "vendor/yaml-mode"]
-	path = vendor/yaml-mode
-	url = git://github.com/yoshiki/yaml-mode.git
