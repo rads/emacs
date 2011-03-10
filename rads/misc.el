@@ -19,6 +19,9 @@
 ;; Enable ANSI color in terminals.
 (ansi-color-for-comint-mode-on)
 
+;; PeepOpen needs this
+(setq ns-pop-up-frames nil)
+
 (setq
   visible-bell t                      ;; Show the box in the middle of the
                                       ;; screen on error.
