@@ -14,17 +14,28 @@
   (setq c-basic-offset 4)
   (abbrev-mode 0)))
 
+;; CSS
+(add-hook 'css-mode-hook 'run-coding-hook)
+(setq css-indent-offset 2)
+
 ;; Yasnippet
 (add-to-list 'load-path (concat vendor-dir "yasnippet"))
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory (concat vendor-dir "yasnippet/snippets"))
 (yas/load-directory (concat dotfiles-dir "rads/snippets"))
+(setq yas/prompt-functions '(yas/dropdown-prompt))
+
+;; Text modes
+(add-hook 'text-mode-hook 'turn-on-flyspell)
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
+;; HTML
+(add-hook 'html-mode-hook 'run-coding-hook)
+(add-hook 'html-mode-hook (lambda () (flyspell-mode -1)))
 
 ;; Markdown
 (add-to-list 'auto-mode-alist '("\\.txt$" . markdown-mode))
-(add-hook 'text-mode-hook 'turn-on-flyspell)
-(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
 ;; JavaScript
 (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
@@ -54,32 +65,10 @@
 (add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
-;; nXhtml
-(load (concat vendor-dir "nxhtml/autostart.el"))
-
-(setq mumamo-chunk-coloring 'submode-colored
-      nxhtml-skip-welcome t
-      indent-region-mode t
-      rng-nxml-auto-validate-flag nil
-      nxml-degraded t)
-
-(add-hook 'nxml-mode-hook 'turn-on-autopair)
-(add-hook 'nxml-mode-hook '(lambda ()
-  (setq autopair-extra-pairs `(:everywhere ((?< . ?>))))))
-
-(eval-after-load 'mumamo
-  '(eval-after-load 'zenburn
-     '(ignore-errors (custom-set-faces
-                      '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil)))
-                      '(mumamo-background-chunk-submode1 ((((class color) (min-colors 88) (background dark)) (:background "grey20"))))))))
-
 ;; Rinari (Minor Mode for Ruby On Rails)
 (setq rinari-major-modes
       (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
             'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
-
-(add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
-(add-to-list 'auto-mode-alist '("\\.rhtml$" . eruby-nxhtml-mumamo-mode))
 
 ;; Textmate and Peepopen
 (add-to-list 'load-path (concat vendor-dir "textmate.el/"))
