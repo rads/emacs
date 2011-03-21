@@ -31,6 +31,8 @@
 (setq system-specific-config (concat dotfiles-dir "rads/systems/" system-name ".el"))
 (if (file-exists-p system-specific-config) (load system-specific-config))
 
+(load (concat dotfiles-dir "local.el"))
+
 ;; Load my customizations.
 (load (concat dotfiles-dir "rads/defuns.el"))
 (load (concat dotfiles-dir "rads/bindings.el"))
