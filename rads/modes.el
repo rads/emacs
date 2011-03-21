@@ -27,7 +27,6 @@
 (setq yas/prompt-functions '(yas/dropdown-prompt))
 
 ;; Text modes
-(add-hook 'text-mode-hook 'turn-on-flyspell)
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
 ;; HTML
