@@ -28,6 +28,7 @@
 
 ;; Text modes
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+(add-hook 'text-mode-hook 'add-watchwords)
 
 ;; HTML
 (add-hook 'html-mode-hook 'run-coding-hook)
