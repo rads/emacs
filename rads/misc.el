@@ -3,6 +3,9 @@
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist (cons 'height my-max-height))
 
+;; This is necessary to use emacsclient over SSH.
+(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+
 ;; Make the titles better and remove any UI.
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
