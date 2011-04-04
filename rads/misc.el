@@ -59,7 +59,7 @@
 ;; Color theme
 (require 'color-theme)
 (require 'zenburn)
-(color-theme-zenburn)
+(when window-system (color-theme-zenburn))
 
 (setq ispell-program-name "aspell")
 (setq ispell-extra-args '("--sug-mode=ultra"))
@@ -120,3 +120,10 @@
      (set-face-foreground 'magit-diff-del "red3")
      (when (not window-system)
        (set-face-background 'magit-item-highlight "white"))))
+
+;; Full ack
+(add-to-list 'load-path (concat vendor-dir "full-ack"))
+(autoload 'ack-same "full-ack" nil t)
+(autoload 'ack "full-ack" nil t)
+(autoload 'ack-find-same-file "full-ack" nil t)
+(autoload 'ack-find-file "full-ack" nil t)
