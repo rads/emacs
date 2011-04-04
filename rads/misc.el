@@ -59,7 +59,7 @@
 ;; Color theme
 (require 'color-theme)
 (require 'zenburn)
-(color-theme-zenburn)
+(when window-system (color-theme-zenburn))
 
 (setq ispell-program-name "aspell")
 (setq ispell-extra-args '("--sug-mode=ultra"))
