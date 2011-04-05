@@ -3,8 +3,6 @@
 (defvar rads-packages (list 'idle-highlight
                             'ruby-mode
                             'markdown-mode
-                            'color-theme
-                            'zenburn
                             'yari
                             'magit
                             'rinari)

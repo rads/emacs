@@ -29,7 +29,10 @@
   font-lock-maximum-decoration t
   inhibit-startup-message t
   transient-mark-mode t               ;; Highlight the current region.
-  color-theme-is-global t
+  color-theme-is-global t           ;; Don't want global color theme because
+                                      ;; we're going to change it in server
+                                      ;; mode.
+;;  color-theme-is-cumulative nil
   delete-by-moving-to-trash t
   shift-select-mode nil               ;; Don't select when holding down shift.
   mouse-yank-at-point t               ;; Insert yanked text at the cursor, not
@@ -57,9 +60,17 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Color theme
+(add-to-list 'load-path (concat vendor-dir "color-theme"))
+(add-to-list 'load-path (concat vendor-dir "zenburn"))
 (require 'color-theme)
 (require 'zenburn)
-(when window-system (color-theme-zenburn))
+;; (defun apply-color-theme (frame)
+;;   (select-frame frame)
+;;   (if (window-system frame)
+;;       (zenburn)))
+;; (add-hook 'after-make-frame-functions 'apply-color-theme)
+(zenburn)
+
 
 (setq ispell-program-name "aspell")
 (setq ispell-extra-args '("--sug-mode=ultra"))
