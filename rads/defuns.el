@@ -1,19 +1,31 @@
 (defalias 'qrr 'query-replace-regexp)
 
+(defun transpose-buffers (arg)
+  "Transpose the buffers shown in two windows."
+  (interactive "p")
+  (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
+    (while (/= arg 0)
+      (let ((this-win (window-buffer))
+            (next-win (window-buffer (funcall selector))))
+        (set-window-buffer (selected-window) next-win)
+        (set-window-buffer (funcall selector) this-win)
+        (select-window (funcall selector)))
+      (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
+
 (defun rename-file-and-buffer (new-name)
-"Renames both current buffer and file it's visiting to NEW-NAME."
-(interactive "sNew name: ")
-(let ((name (buffer-name))
-      (filename (buffer-file-name)))
-  (if (not filename)
-      (message "Buffer '%s' is not visiting a file!" name)
-    (if (get-buffer new-name)
-        (message "A buffer named '%s' already exists!" new-name)
-      (progn
-        (rename-file name new-name 1)
-        (rename-buffer new-name)
-        (set-visited-file-name new-name)
-        (set-buffer-modified-p nil))))))
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file name new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
 
 (defun defunkt-clean-slate ()
   "Kills all buffers except *scratch*"
@@ -23,7 +35,7 @@
       (when (not (member (car buffers) safe))
         (kill-buffer (car buffers))
         (setq buffers (cdr buffers))))))
-        
+
 (defun ido-imenu ()
   "Update the imenu index and then use ido to select a symbol to navigate to.
 Symbols matching the text at point are put first in the completion list."
@@ -65,7 +77,7 @@ Symbols matching the text at point are put first in the completion list."
     (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
            (position (cdr (assoc selected-symbol name-and-pos))))
       (goto-char position))))
-              
+
 (defun recentf-ido-find-file ()
   "Find a recent file using ido."
   (interactive)
@@ -118,7 +130,7 @@ Symbols matching the text at point are put first in the completion list."
   (font-lock-add-keywords
    nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
           1 font-lock-warning-face t))))
-  
+
 (defun run-coding-hook ()
   "Enable things that are convenient across all coding buffers."
   (run-hooks 'coding-hook))
