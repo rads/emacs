@@ -138,3 +138,7 @@
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
 (autoload 'ack-find-file "full-ack" nil t)
+
+;; Magit
+(add-to-list 'load-path (concat vendor-dir "magit"))
+(require 'magit)
