@@ -12,6 +12,7 @@
 ;; Window movement
 (global-set-key (kbd "C-<tab>") 'other-window)
 (global-set-key (kbd "C-x 4 t") 'transpose-buffers)
+(global-set-key (kbd "C-z") nil) ;; Don't minimize
 
 ;; File finding
 (global-set-key (kbd "C-x f") 'recentf-ido-find-file)
