@@ -84,6 +84,11 @@
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+(defun coffee-custom ()
+  "coffee-mode hook"
+  (set (make-local-variable 'tab-width) 2)
+  (setq coffee-js-mode 'javascript-mode)
+  (define-key coffee-mode-map (kbd "RET") 'newline-and-indent))
 (add-hook 'coffee-mode-hook
-          '(lambda() (set (make-local-variable 'tab-width) 2)))
+          '(lambda() (coffee-custom)))
 (add-hook 'coffee-mode-hook 'run-coding-hook)
